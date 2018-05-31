@@ -1,0 +1,127 @@
+---
+title: "find_betfair_worldcup2018_markets"
+author: "Nima Hamedani-Raja"
+date: "29 May 2018"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+## About 
+
+A piece of code to find the IDs of betfair World Cup markets. I'll use these IDs to regularly sample the market.  
+I am using [abettor](https://github.com/phillc73/abettor) here. Many thanks to [phillc73](https://github.com/phillc73).  
+also see [betfair developer program](http://docs.developer.betfair.com/docs/display/1smk3cen4v3lu3yomq5qye0ni/Getting+Started).  
+
+## INIT
+
+Install and load abettor.
+
+```{r abettor}
+# devtools::install_github("phillc73/abettor")
+library("abettor")
+```
+
+load other libraries.
+
+```{r libraries}
+library(knitr)
+```
+
+
+Load username, password, and application key. *as if I am uploading them to a public repo!*
+
+```{r load_upa}
+nima <- read.csv("my_login_data.csv")
+
+logoutBF(suppress = TRUE, sslVerify = TRUE)
+
+loginBF(username = nima$username, 
+        password = nima$password, 
+        applicationKey = as.character(nima$applicationKey))
+```
+
+Find eventtype.id for football:  
+
+```{r eventtype.id}
+eventtypes <- listEventTypes()
+
+eventtypes
+
+football_eventtypeid <- subset(eventtypes$eventType, name == "Soccer")$id
+
+football_eventtypeid
+```
+
+List all football competitions. Make sure toDate is set to a date *after* the final match, default value is tomorrow.    
+
+```{r listCompetitions}
+football_competitions <- 
+    listCompetitions(eventTypeIds = football_eventtypeid, 
+                     toDate = "2019-05-30T12:00:00Z")
+
+head(football_competitions)
+
+worldcup_competitionid <- 
+    subset(football_competitions$competition, 
+           name == "2018 FIFA World Cup")$id
+
+worldcup_competitionid
+```
+
+List MarketTypes:  
+
+```{r markettypes}
+listMarketTypes(eventTypeIds = football_eventtypeid, 
+                competitionIds = worldcup_competitionid, 
+                toDate = "2019-05-30T12:00:00Z")
+```
+
+For now, I am only interested in WINNER. 
+
+Get MarketCatalogue:  
+
+```{r marketcatalogue}
+Winner_MarketCatalogue <- 
+    listMarketCatalogue(eventTypeIds = football_eventtypeid, 
+                        competitionIds = worldcup_competitionid, 
+                        toDate = "2019-05-30T12:00:00Z", 
+                        marketTypeCodes = "WINNER")
+
+Winner_MarketCatalogue
+
+Winner_marketId <- 
+    Winner_MarketCatalogue$marketId
+
+Winner_marketId
+```
+
+```{r marketbook}
+Winner_MarketBook <- listMarketBook(marketIds = Winner_marketId, priceData = "EX_ALL_OFFERS")
+Winner_MarketBook$runners 
+
+```
+
+
+
+
+## Temp
+
+
+```{r}
+
+# listEvents(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z")
+# listEvents(eventTypeIds = 1, competitionIds = 5614746, eventIds = 27232418,  toDate = "2019-05-30T12:00:00Z")
+# 
+# listMarketCatalogue(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z", 
+#                     eventIds = 27232418,
+#                     marketTypeCodes =
+#                         listMarketTypes(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z")$marketType
+# )                    
+
+
+
+
+logoutBF(suppress = TRUE, sslVerify = TRUE)
+
+```
