@@ -9,7 +9,7 @@ output:
 
 ## About 
 
-A piece of code to find the IDs of betfair World Cup markets. I'll use these IDs to regularly sample the market.  
+A piece of (exploratory) code to find the IDs of betfair World Cup markets. I'll use these IDs to regularly sample the market.  
 I am using [abettor](https://github.com/phillc73/abettor) here. Many thanks to [phillc73](https://github.com/phillc73).  
 also see [betfair developer program](http://docs.developer.betfair.com/docs/display/1smk3cen4v3lu3yomq5qye0ni/Getting+Started).  
 
@@ -40,6 +40,8 @@ loginBF(username = nima$username,
         password = nima$password, 
         applicationKey = as.character(nima$applicationKey))
 ```
+
+## Odds for a given market  
 
 Find eventtype.id for football:  
 
@@ -72,9 +74,11 @@ worldcup_competitionid
 List MarketTypes:  
 
 ```{r markettypes}
-listMarketTypes(eventTypeIds = football_eventtypeid, 
-                competitionIds = worldcup_competitionid, 
-                toDate = "2019-05-30T12:00:00Z")
+all_MarketTypes <- 
+    listMarketTypes(eventTypeIds = football_eventtypeid, 
+                    competitionIds = worldcup_competitionid, 
+                    toDate = "2019-05-30T12:00:00Z")
+all_MarketTypes
 ```
 
 For now, I am only interested in WINNER. 
@@ -96,32 +100,36 @@ Winner_marketId <-
 Winner_marketId
 ```
 
+Get the odds: 
+
 ```{r marketbook}
 Winner_MarketBook <- listMarketBook(marketIds = Winner_marketId, priceData = "EX_ALL_OFFERS")
 Winner_MarketBook$runners 
 
 ```
 
+## Find all submarkets of a market
 
 
+```{r submakets}
+all_events <- listEvents(eventTypeIds = football_eventtypeid, 
+                         competitionIds = worldcup_competitionid, 
+                         toDate = "2019-05-30T12:00:00Z")
 
-## Temp
+OpeningMatch_id <- subset(all_events$event, name == "Russia v Saudi Arabia")$id
 
+OpeningMatch_Catalogue <- 
+    listMarketCatalogue(eventTypeIds = football_eventtypeid, 
+                        competitionIds = worldcup_competitionid, 
+                        toDate = "2019-05-30T12:00:00Z", 
+                        eventIds = OpeningMatch_id,
+                        marketTypeCodes = all_MarketTypes$marketType)                    
 
-```{r}
-
-# listEvents(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z")
-# listEvents(eventTypeIds = 1, competitionIds = 5614746, eventIds = 27232418,  toDate = "2019-05-30T12:00:00Z")
-# 
-# listMarketCatalogue(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z", 
-#                     eventIds = 27232418,
-#                     marketTypeCodes =
-#                         listMarketTypes(eventTypeIds = 1, competitionIds = 5614746, toDate = "2019-05-30T12:00:00Z")$marketType
-# )                    
-
-
-
-
-logoutBF(suppress = TRUE, sslVerify = TRUE)
-
+OpeningMatch_Catalogue
 ```
+
+```{r logout}
+logoutBF(suppress = TRUE, sslVerify = TRUE)
+```
+
+
