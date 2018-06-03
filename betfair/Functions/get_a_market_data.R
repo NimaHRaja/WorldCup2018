@@ -1,7 +1,10 @@
-get_a_market_data <- function(a_market_id, folder, market_name){
+get_a_market_data <- function(a_market, folder){
+
+    market_id <- as.data.frame(a_market)$marketId
+    market_name <- gsub("/", "-",  as.data.frame(a_market)$marketName)
     
     MarketBook_raw <- 
-        listMarketBook(marketIds = a_market_id, 
+        listMarketBook(marketIds = market_id, 
                        priceData = "EX_ALL_OFFERS")
     
     time <- Sys.time()
@@ -14,8 +17,10 @@ get_a_market_data <- function(a_market_id, folder, market_name){
     
     MarketBook <- 
         list(time = time, 
-             market = "Winner",
+             Catalogue = a_market,
              MarketBook = MarketBook_raw)
     
     save(MarketBook, file = file_name)
 }
+
+
