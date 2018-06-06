@@ -22,7 +22,5 @@ clean_a_data_file <- function(a_data_file){
     out
 }
 
-
-
 all_data_odds <- do.call(rbind, lapply(data_files, clean_a_data_file))
 write.csv(all_data_odds, "betfair/all_data_odds.csv", row.names = FALSE)

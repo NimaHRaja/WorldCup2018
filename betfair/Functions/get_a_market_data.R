@@ -22,5 +22,3 @@ get_a_market_data <- function(a_market, folder){
     
     save(MarketBook, file = file_name)
 }
-
-
