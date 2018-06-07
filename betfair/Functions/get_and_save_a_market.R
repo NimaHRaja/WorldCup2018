@@ -14,6 +14,7 @@ get_and_save_a_market <- function(a_market, folder){
                        priceData = "EX_ALL_OFFERS")
     
     time <- Sys.time()
+    
     file_name <- paste("betfair/data/",
                        event_name,
                        "_",
@@ -22,6 +23,8 @@ get_and_save_a_market <- function(a_market, folder){
                        format(time, "%Y%m%d_%H%M%S"),
                        ".rda", 
                        sep = "")
+    
+    print(file_name)
     
     MarketBook <- 
         list(time = time, 
