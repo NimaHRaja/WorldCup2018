@@ -10,9 +10,9 @@ DF_market_sizes <-
             arrange(marketStartTime)
     )
 
-# DF_market_sizes$eventName <- factor(DF_market_sizes$eventName, levels = DF_market_sizes$eventName[order(DF_market_sizes$marketStartTime)])
+DF_market_sizes$eventName <- factor(DF_market_sizes$eventName, levels = DF_market_sizes$eventName[order(DF_market_sizes$marketStartTime)])
 
-jpeg("betfair/outputs/twitter_BetfairMatchesTotalMatched_20180607.jpg", width = 1200, height = 600)
+# jpeg("betfair/outputs/twitter_BetfairMatchesTotalMatched_20180607.jpg", width = 1200, height = 600)
 ggplot(DF_market_sizes,
        aes(x = eventName, 
            y = totalMatched, 
@@ -21,5 +21,5 @@ ggplot(DF_market_sizes,
     theme(axis.text.x = element_text(angle = -90), legend.position = "none") +
     scale_y_continuous(label = unit_format(unit = "£")) +
     xlab("Match") +
-    ggtitle("Betfair / Worldcup 2018 / Matches / Total Matched / THU 07-JUN-18")
+    ggtitle("Betfair / Worldcup 2018 / Match Odds / Total Matched / THU 07-JUN-18")
 # dev.off()
