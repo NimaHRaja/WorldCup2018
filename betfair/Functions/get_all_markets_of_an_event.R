@@ -15,5 +15,8 @@ get_all_markets_of_an_event <- function(eventtypeid, competitionid, eventid){
                             eventIds = eventid,
                             marketTypeCodes = market_types)                    
     
-    for (i in 1:dim(Market_Catalogue)[1]) {get_and_save_a_market(Market_Catalogue[i,], "betfair/data/")}
+    for (i in 1:dim(Market_Catalogue)[1]) {
+        get_and_save_a_market(Market_Catalogue[i,], "betfair/data/")
+        print(Market_Catalogue[i,]$marketName)
+        }
 }

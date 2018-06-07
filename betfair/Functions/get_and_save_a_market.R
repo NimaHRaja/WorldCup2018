@@ -6,8 +6,8 @@
 get_and_save_a_market <- function(a_market, folder){
 
     market_id <- as.data.frame(a_market)$marketId
-    market_name <- gsub("/", "-",  as.data.frame(a_market)$marketName)
-    event_name <- gsub("/", "-",  as.data.frame(a_market)$event$name)
+    market_name <- gsub("/|\\?", "-",  as.data.frame(a_market)$marketName)
+    event_name <- gsub("/|\\?", "-",  as.data.frame(a_market)$event$name)
     
     MarketBook_raw <- 
         listMarketBook(marketIds = market_id, 
