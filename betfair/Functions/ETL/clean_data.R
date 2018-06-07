@@ -19,6 +19,7 @@ clean_a_data_file <- function(a_data_file){
     out$eventName <- MarketBook$Catalogue$event$name
     out$totalMatched <- MarketBook$MarketBook$totalMatched
     out$totalAvailable <- MarketBook$MarketBook$totalAvailable
+    out$marketStartTime <- MarketBook$Catalogue$marketStartTime
     
     out
 }

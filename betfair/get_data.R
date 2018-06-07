@@ -25,9 +25,9 @@ loginBF(username = nima$username,
 
 # load functions
 
-source("betfair/Functions/get_and_save_a_market.R")
-source("betfair/Functions/get_all_markets_of_an_event.R")
-source("betfair/Functions/get_all_events_of_a_competition.R")
+source("betfair/Functions/ETL/get_and_save_a_market.R")
+source("betfair/Functions/ETL/get_all_markets_of_an_event.R")
+source("betfair/Functions/ETL/get_all_events_of_a_competition.R")
 
 # get data
 
