@@ -1,7 +1,3 @@
-library(ggplot2)
-library(scales)
-
-
 jpeg("betfair/outputs/twitter_BetfairWinnerTotalMatched_20180606.jpg", width = 800, height = 600)
 ggplot(subset(all_data_odds, marketName == "Winner 2018"),
        aes(x = as.POSIXct(time), y = totalMatched)) + 
