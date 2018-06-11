@@ -6,6 +6,7 @@ get_all_markets_of_an_event <- function(eventtypeid, competitionid, eventid){
     market_types <- 
         listMarketTypes(eventTypeIds = eventtypeid, 
                         competitionIds = competitionid, 
+                        eventIds = eventid,
                         toDate = "2019-05-30T12:00:00Z")$marketType
     
     Market_Catalogue <- 

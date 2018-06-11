@@ -26,7 +26,7 @@ market_odds$Team <-
 my_colours <- 
     unique(Team_colours$Team_colour)[order(unique(Team_colours$Team))]
 
-jpeg("betfair/outputs/twitter_BetfairWinnervTime_20180609.jpg", width = 1200, height = 600)
+# jpeg("betfair/outputs/twitter_BetfairWinnervTime_20180609.jpg", width = 1200, height = 600)
 ggplot(market_odds,
        aes(x = as.POSIXct(time), y = prob, colour = Team)) +
     geom_point() +
@@ -37,4 +37,4 @@ ggplot(market_odds,
     geom_line() +  
     theme_dark() +
     scale_colour_manual(values = my_colours)
-dev.off()
+# dev.off()
