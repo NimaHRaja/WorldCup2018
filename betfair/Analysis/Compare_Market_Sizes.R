@@ -28,7 +28,7 @@ DF_market_sizes$eventName <-
 file_name <- "betfair/outputs/twitter_BetfairMatchesTotalMatched_20180612.jpg"
 title <- "Betfair / Worldcup 2018 / Match Odds / Total Matched / TUE 12-JUN-18"
 
-# jpeg(file_name, width = 1200, height = 600)
+jpeg(file_name, width = 1200, height = 600)
 ggplot(DF_market_sizes,
        aes(x = eventName, 
            y = totalMatched, 
@@ -38,4 +38,4 @@ ggplot(DF_market_sizes,
     scale_y_continuous(label = unit_format(unit = "£")) +
     xlab("Match") +
     ggtitle(title)
-# dev.off()
+dev.off()
