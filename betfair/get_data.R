@@ -32,3 +32,5 @@ source("betfair/Functions/ETL/get_all_events_of_a_competition.R")
 # get data
 
 get_all_events_of_a_competition(1, 5614746)
+
+clean_a_day_of_data("20180613")

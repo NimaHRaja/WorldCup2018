@@ -24,5 +24,22 @@ clean_a_data_file <- function(a_data_file){
     out
 }
 
-all_data_odds <- do.call(rbind, lapply(data_files, clean_a_data_file))
-write.csv(all_data_odds, "betfair/all_data_odds.csv", row.names = FALSE)
+clean_a_day_of_data <- function(a_date_to_clean){
+    files <- list.files("betfair/data/")
+    
+    file_dates <- 
+        unlist(lapply(strsplit(files, "_"), 
+                      function(x) {x[grepl("20180", x)]}))
+    
+    # table(file_dates)
+    
+    data_files_a_date <- 
+        files[file_dates == a_date_to_clean]
+    
+    a_date_data <- 
+        do.call(rbind, lapply(data_files_a_date, clean_a_data_file))
+    
+    write.csv(a_date_data, 
+              paste("betfair/data_cleaned/all_data_", a_date_to_clean, sep = ""), 
+              row.names = FALSE)
+}
