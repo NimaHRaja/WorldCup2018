@@ -45,9 +45,9 @@ plot_Winner <- get_a_group_graph("Group A",
                                  100)
 
 plot_Qual <- get_a_group_graph("Group A", 
-                                 "To Qualify", 
-                                 "Betfair / Worldcup 2018 / To Qualify / WED 13-JUN-18", 
-                                 200)
+                               "To Qualify", 
+                               "Betfair / Worldcup 2018 / To Qualify / WED 13-JUN-18", 
+                               200)
 
 plot_Bottom <- get_a_group_graph("Group A", 
                                  "Rock Bottom", 
