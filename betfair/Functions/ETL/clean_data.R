@@ -40,6 +40,6 @@ clean_a_day_of_data <- function(a_date_to_clean){
         do.call(rbind, lapply(data_files_a_date, clean_a_data_file))
     
     write.csv(a_date_data, 
-              paste("betfair/data_cleaned/all_data_", a_date_to_clean, sep = ""), 
+              paste("betfair/data_cleaned/all_data_", a_date_to_clean, ".csv", sep = ""), 
               row.names = FALSE)
 }
