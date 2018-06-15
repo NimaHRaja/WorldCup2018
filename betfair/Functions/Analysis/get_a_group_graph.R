@@ -39,24 +39,24 @@ get_a_group_graph <- function(a_group, a_market, a_title, norm_factor){
 
 
 
-plot_Winner <- get_a_group_graph("Group A", 
+plot_Winner <- get_a_group_graph("Group B", 
                                  "Group Winner", 
-                                 "Betfair / Worldcup 2018 / Group Winner / WED 13-JUN-18", 
+                                 "Betfair / Worldcup 2018 / Group Winner / FRI 15-JUN-18", 
                                  100)
 
-plot_Qual <- get_a_group_graph("Group A", 
+plot_Qual <- get_a_group_graph("Group B", 
                                "To Qualify", 
-                               "Betfair / Worldcup 2018 / To Qualify / WED 13-JUN-18", 
+                               "Betfair / Worldcup 2018 / To Qualify / FRI 15-JUN-18", 
                                200)
 
-plot_Bottom <- get_a_group_graph("Group A", 
+plot_Bottom <- get_a_group_graph("Group B", 
                                  "Rock Bottom", 
-                                 "Betfair / Worldcup 2018 / Rock Bottom / WED 13-JUN-18", 
+                                 "Betfair / Worldcup 2018 / Rock Bottom / FRI 15-JUN-18", 
                                  100)
 
 library(gridExtra)
 
-jpeg("betfair/outputs/twitter_GroupA_20180613.jpg", height = 1000, width = 2000)
+jpeg("betfair/outputs/twitter_GroupB_20180615.jpg", height = 1000, width = 2000)
 grid.arrange(plot_Winner,plot_Qual, plot_Bottom,
              nrow = 2)
 dev.off()
