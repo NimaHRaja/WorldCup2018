@@ -1,8 +1,9 @@
+#to be documented
 source("betfair/Functions/get_latest_odds_of_a_market.R")
 source("FiveThirtyEight/get_FiveThirtyEight_predictions.R")
 Team_colours <- read.csv("betfair/Team_colours.csv", stringsAsFactors = FALSE)
 
-
+predictions_538 <- predictions_538 %>% filter(Group == "B")
 DF_qual_prob <- get_latest_odds_of_a_market("To Qualify", 200)
 
 
@@ -24,7 +25,7 @@ DF_qual_prob <-
           by = "Team")
 
 
-jpeg("betfair/outputs/twitter_CompareProbs_20180613.jpg", height = 1000, width = 2000)
+jpeg("betfair/outputs/twitter_CompareProbs_GroupB_20180615.jpg", height = 1000, width = 2000)
 ggplot(DF_qual_prob, aes(x = prob_betfair, y =  prob_FiveThirtyEight, colour = Team, label = Team)) + 
     geom_point() + 
     geom_text(size = 5) +

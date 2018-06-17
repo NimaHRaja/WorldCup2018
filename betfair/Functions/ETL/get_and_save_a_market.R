@@ -1,3 +1,4 @@
+#to be documented
 # get_and_save_a_market
 # this function gets a catalogue (of a market) as argument
 # and gets MarketBook for that market
@@ -15,7 +16,7 @@ get_and_save_a_market <- function(a_market, folder){
     
     time <- Sys.time()
     
-    file_name <- paste("betfair/data/",
+    file_name <- paste(folder,
                        event_name,
                        "_",
                        market_name,

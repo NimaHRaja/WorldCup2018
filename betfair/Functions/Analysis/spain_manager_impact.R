@@ -1,3 +1,4 @@
+#to be documented
 data_cleaned_files <- list.files("betfair/data_cleaned/", full.names = TRUE)
 
 all_data <- do.call(rbind, 
@@ -29,7 +30,7 @@ DF_spain[DF_spain$marketName == "Match Odds",]$marketName <-
     paste(DF_spain[DF_spain$marketName == "Match Odds",]$eventName, "(Spain wins)", "")
 
 
-jpeg("betfair/outputs/twitter_Spain_Manager_20180614.jpg", height = 1000, width = 2000)
+jpeg("betfair/outputs/twitter_Spain_Manager_20180614.jpg", height = 800, width = 1600)
 ggplot(DF_spain, aes(x = as.POSIXlt(time), y = prob, colour = marketName)) + 
     geom_point() +
     geom_line() +

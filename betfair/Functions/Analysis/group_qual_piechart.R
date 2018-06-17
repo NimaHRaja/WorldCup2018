@@ -1,3 +1,4 @@
+#to be documented
 all_data_odds <- read.csv("betfair/all_data_odds.csv", stringsAsFactors = FALSE)
 
 Team_colours <- read.csv("betfair/Team_colours.csv")

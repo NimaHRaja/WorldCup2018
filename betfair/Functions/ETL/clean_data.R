@@ -1,8 +1,9 @@
+#to be documented
 data_files <- list.files("betfair/data/")
 
 clean_a_data_file <- function(a_data_file){
     
-    load(paste("betfair/data/", a_data_file, sep = ""))
+    load(a_data_file)
     print(a_data_file)
     
     meta_selectionid <- as.data.frame(MarketBook$Catalogue$runners)
@@ -25,7 +26,7 @@ clean_a_data_file <- function(a_data_file){
 }
 
 clean_a_day_of_data <- function(a_date_to_clean){
-    files <- list.files("betfair/data/")
+    files <- list.files("betfair/data/", full.names = TRUE)
     
     file_dates <- 
         unlist(lapply(strsplit(files, "_"), 
@@ -42,4 +43,14 @@ clean_a_day_of_data <- function(a_date_to_clean){
     write.csv(a_date_data, 
               paste("betfair/data_cleaned/all_data_", a_date_to_clean, ".csv", sep = ""), 
               row.names = FALSE)
+}
+
+clean_a_folder <- function(a_folder, output_file){
+    files <- list.files(a_folder, full.names = TRUE)
+    
+    a_folder_data <- 
+        do.call(rbind, lapply(files, clean_a_data_file))
+    
+    write.csv(a_folder_data, output_file, row.names = FALSE)
+    
 }

@@ -1,3 +1,4 @@
+#to be documented
 get_all_odds_of_an_event <- function(a_market, an_event, norm_factor){
     
 #     data_cleaned_files <- list.files("betfair/data_cleaned/", full.names = TRUE)

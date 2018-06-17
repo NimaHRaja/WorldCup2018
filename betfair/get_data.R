@@ -1,3 +1,4 @@
+# to be documented
 # get_data
 # connects to betfair API
 # and calls get_all_events_of_a_competition 
@@ -12,6 +13,7 @@ library(abettor)
 library(dplyr)
 library(ggplot2)
 library(scales)
+library(reshape2)
 
 
 # login
@@ -28,10 +30,10 @@ loginBF(username = nima$username,
 source("betfair/Functions/ETL/get_and_save_a_market.R")
 source("betfair/Functions/ETL/get_all_markets_of_an_event.R")
 source("betfair/Functions/ETL/get_all_events_of_a_competition.R")
-source("betfair/Functions/ETL/clean_data.R")
+# source("betfair/Functions/ETL/clean_data.R")
 
-# get data
+# get all data
 
-get_all_events_of_a_competition(1, 5614746)
+get_all_events_of_a_competition(1, 5614746, "betfair/data/")
 
-clean_a_day_of_data("20180613")
+# clean_a_day_of_data("20180616")

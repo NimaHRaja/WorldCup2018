@@ -1,3 +1,4 @@
+#to be documented
 all_data_odds <- read.csv("betfair/all_data_odds.csv")
 
 a_market <- "Winner 2018"

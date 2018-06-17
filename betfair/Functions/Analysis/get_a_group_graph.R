@@ -1,3 +1,4 @@
+#to be documented
 data_cleaned_files <- list.files("betfair/data_cleaned/", full.names = TRUE)
 
 all_data <- do.call(rbind, lapply(data_cleaned_files, read.csv, stringsAsFactors = FALSE))
@@ -56,8 +57,8 @@ plot_Bottom <- get_a_group_graph("Group B",
 
 library(gridExtra)
 
-jpeg("betfair/outputs/twitter_GroupB_20180615.jpg", height = 1000, width = 2000)
+# jpeg("betfair/outputs/twitter_GroupB_20180615_2.jpg", height = 1000, width = 2000)
 grid.arrange(plot_Winner,plot_Qual, plot_Bottom,
              nrow = 2)
-dev.off()
+# dev.off()
 

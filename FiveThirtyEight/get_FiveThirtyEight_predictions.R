@@ -1,3 +1,5 @@
+# To be documented
+
 library(XML)
 
 # html_538 <- readLines("FiveThirtyEight/Data/FiveThirtyEight_20180613_170230.html")

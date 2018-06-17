@@ -1,3 +1,4 @@
+#to be documented
 get_latest_odds_of_a_market <- function(a_market, norm_factor){
     
     data_cleaned_files <- list.files("betfair/data_cleaned/", full.names = TRUE)
