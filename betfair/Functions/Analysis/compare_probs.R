@@ -46,3 +46,53 @@ dev.off()
 #     # theme_dark() +
 #     xlim(c(0,100)) +
 #     ylim(c(0,100))
+
+####### version 30JUN
+
+load("betfair/data/FIFA World Cup 2018_Winner 2018_20180630_120808.rda")
+
+
+meta_selectionid <- as.data.frame(MarketBook$Catalogue$runners)
+price_data <- as.data.frame(MarketBook$MarketBook$runners)
+price_data <- merge(price_data, meta_selectionid, by = "selectionId")
+price_data$back <- unlist(lapply(price_data$ex$availableToBack, function(x) max(x$price)))
+price_data$lay <- unlist(lapply(price_data$ex$availableToLay, function(x) min(x$price)))
+DF_betfair <- 
+    price_data %>% 
+    select(c(status, runnerName, back, lay)) %>% 
+    filter(status == "ACTIVE") %>%
+    mutate(prob = 50/back + 50/lay) %>%
+    mutate(prob_betfair = 100 * prob / sum(prob)) 
+
+DF_538 <- clean_a_538_html("FiveThirtyEight/Data/FiveThirtyEight_20180630_122100.html")
+DF_538$`WinWorld cup` <- gsub("<", "", DF_538$`WinWorld cup`)
+DF_538$prob_FiveThirtyEight <-  
+    as.numeric(gsub("%", "", DF_538$`WinWorld cup`))
+
+DF_winner_prob <- merge(DF_538,
+                        DF_betfair,
+                      by.x = "Team", 
+                      by.y = "runnerName")
+
+Team_colours <- read.csv("Team_colours.csv", stringsAsFactors = FALSE)
+
+DF_winner_prob <- 
+    merge(DF_winner_prob, 
+          Team_colours, 
+          by = "Team")
+
+
+
+jpeg("betfair/outputs/twitter_CompareProbs_Winner_20180630.jpg", height = 1000, width = 2000)
+ggplot(DF_winner_prob, aes(x = prob_betfair, y =  prob_FiveThirtyEight, colour = Team, label = Team)) + 
+    geom_point() + 
+    geom_text(size = 5) +
+    geom_abline(slope = 1, intercept = 0, colour = "orange") +
+    scale_colour_manual(values = DF_winner_prob$Team_colour) +
+    theme_dark() +
+    theme(legend.position = "none") +
+    xlim(c(0,30)) + 
+    # scale_x_log10() +
+    # scale_y_log10() +
+    ylim(c(0,30))
+dev.off()
