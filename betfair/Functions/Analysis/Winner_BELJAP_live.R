@@ -34,13 +34,15 @@ bb <-
 
 my_colours <- unique(as.character(bb$Team_colour[order(bb$Team)]))
 
+jpeg("betfair/outputs/twitter_Winner_BELJAP_live.jpg", height = 600, width = 1200)
 ggplot(bb, aes(x = time, y = prob, colour = Team)) + 
     geom_point() +
     geom_errorbar(aes(ymin=100/lay, ymax=100/back)) +
     geom_line() +
     scale_colour_manual(values =my_colours) +
     xlab("Date") +
+    ylab("Winner Probability (%)") +
     ggtitle("Betfair / Worldcup 2018 / Winner / 02JUL18") +
     theme_dark() + 
     labs(colour = "Team")
-    
+dev.off()    
